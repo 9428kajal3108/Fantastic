@@ -1,0 +1,398 @@
+<template>
+    <section class="header" style="width: 100%; top:0;">
+        <h2 style="font-family: 'Brush Script MT', cursive; cursor:pointer;" onclick={navigateToIndex}>Fantastic</h2>
+
+        <div>
+            <ul class="navbar">
+                <li><a class={homeClass} href="#home" onclick={showHomePage}>{homeText}</a></li>
+                <li><a class={shopClass} href="#shop" onclick={showShopPage}>{shopText}</a></li>
+                <li><a class={aboutClass} href="#about" onclick={showAboutPage}>{aboutText}</a></li>
+                <li><a class={blogClass} href="#blog" onclick={showBlogPage}>{blogText}</a></li>
+                <li><a href="#cart" class="lg-bag" onclick={showCartPage}><lightning-icon icon-name="utility:cart"  size="small" style="--sds-c-icon-color-foreground-default: #1a1a1a;" alternative-text="Cart!" title="Cart"></lightning-icon>
+                </a></li>
+                <button class="cred" onclick={showSignupPage}>Sign Up</button>
+                <button class="cred" onclick={showLoginPage}>Login</button>
+            </ul>
+        </div>
+
+
+        <div class="mobile">
+            <a href=""><i class="fa fa-shopping-cart" aria-hclassden="true"></i></a>
+            <i class="bar fas fa-outdent"></i>
+        </div>
+    </section>
+
+    <div if:true={showFirstDiv}>
+    <section class="hero" style={backgroundStyle}>
+        <h4>{heroSubtitle}</h4>
+
+        <h2>{heroTitle}</h2>
+        <h1>{heroSubtitle2}</h1>
+        <p>{heroDescription}</p>
+        <button onclick={navigateToShop}>{shopNowText}</button>
+    </section>
+
+    <section  class="feature section-p1">
+        <div class="fe-box">
+            <img src={f1ImgUrl} alt="">
+            <h6>Free Shipping</h6>
+        </div>
+        <div class="fe-box">
+            <img src={f2ImgUrl} alt="">
+            <h6>Online Order</h6>
+        </div>
+        <div class="fe-box">
+            <img src={f3ImgUrl} alt="">
+            <h6>Save Money</h6>
+        </div>
+        <div class="fe-box">
+            <img src={f4ImgUrl} alt="">
+            <h6>Promotions</h6>
+        </div>
+        <div class="fe-box">
+            <img src={f5ImgUrl} alt="">
+            <h6>24/7 Support</h6>
+        </div>
+    </section>
+
+    <section class="product1 section-p1">
+        <h2>{featuredProductTitle}</h2>
+        <p>{featuredProductDescription}</p>
+        <div class="pro-container" if:true={products}>
+            <template for:each={products} for:item="product" key={product.Id}>
+                <div key={product.Id} class="product-container">
+                    <img src={product.ImageUrl__c} alt={product.Product_Title__c}>
+                    <p>Category: {product.Categories__c}</p>
+                    <h2>{product.Product_Title__c}</h2>
+                    <p>Price: {product.Product_Price__c}</p>
+                    <button style="color: black;" onclick={addToCartHandler} data-id={product.Id}>
+                        Add to Cart
+                    </button>
+                    
+                    
+                </div>
+            </template>
+            
+        </div>
+    </section>
+
+
+    <section class="banner section-m1" style={backgroundService}>
+        <h4>Services</h4>
+        <h2>Up to <span>70% off</span> on All T-shirt and Accessories</h2>
+        <lightning-button class="normal" label="Explore More" onclick={handleExplore}></lightning-button>
+    </section>
+
+    <section class="sm-bannner section-p1" style="display: flex; flex-wrap: wrap;
+ justify-content: space-between;">
+        <div class="banner-box" style={backgroundLarge1}>
+            <h4>Crazy Deals</h4>
+            <h2>but 1 get 1 free</h2>
+            <span>The best classic dress is on sale at Fantastic</span>
+            <lightning-button class="white-bg" label="Learn More" onclick={handleLearnMore}></lightning-button>
+        </div>
+        <div class="banner-box banner-box2" style={backgroundLarge2}>
+            <h4>Spring Season</h4>
+            <h2>Upcoming season</h2>
+            <span>The best classic dress is on sale at Fantastic</span>
+            <lightning-button class="white-bg" label="Learn More" onclick={handleLearnMore}></lightning-button>
+        </div>
+    </section>
+
+    <section class="banner3">
+        <div class="banner-box" style={backgroundSmall1}>
+            <h2>Seasonal Sale</h2>
+            <h3>Winter Collection 50% OFF</h3>
+        </div>
+        <div class="banner-box banner-box1" style={backgroundSmall2}>
+            <h2>New Footwear Collection</h2>
+            <h3>Up to 20% OFF</h3>
+        </div>
+        <div class="banner-box banner-box5" style={backgroundSmall3}>
+            <h2>T-shirts</h2>
+            <h3>Trendy prints with great deals</h3>
+        </div>
+    </section>
+
+<!-- 
+    <div class="popup" id="popupForm">
+        <div class="popup-content">
+            <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DIS000000Hcy9" method="POST">
+
+                    <input type=hidden name="oid" value="00DIS000000Hcy9">
+                    <input type=hidden name="retURL" value="http://mvclouds56-dev-ed.develop.lightning.force.com/c/LwcApplication.app#home-0">
+                    
+                    <label for="salutation">Salutation</label><select  id="salutation" name="salutation"><option value="">--None--</option><option value="Mr.">Mr.</option>
+                    <option value="Ms.">Ms.</option>
+                    <option value="Mrs.">Mrs.</option>
+                    <option value="Dr.">Dr.</option>
+                    <option value="Prof.">Prof.</option>
+                    <option value="Mx.">Mx.</option>
+                    </select><br>
+                    
+                    <label for="first_name">First Name</label><input  id="first_name" maxlength="40" name="first_name" size="20" type="text" /><br>
+                    
+                    <label for="last_name">Last Name</label><input  id="last_name" maxlength="80" name="last_name" size="20" type="text" /><br>
+                    
+                    <label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
+                    
+                    <label for="phone">Phone</label><input  id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
+                    
+                    <label for="city">City</label><input  id="city" maxlength="40" name="city" size="20" type="text" /><br>
+                    
+                    <label for="state">State/Province</label><input  id="state" maxlength="20" name="state" size="20" type="text" /><br>
+                    
+                    <label for="street">Street</label><textarea name="street"></textarea><br>
+                    
+                    <label for="country">Country</label><input  id="country" maxlength="40" name="country" size="20" type="text" /><br>
+                    
+                    <label for="zip">Zip</label><input  id="zip" maxlength="20" name="zip" size="20" type="text" /><br>
+                    
+                    <input type="submit" name="submit">
+                    
+                    </form>
+                
+        </div>
+    </div> -->
+    </div>
+
+    <div if:true={showSecondDiv}>
+        <section class="pageHeader" style={backgroundShopBanner}>
+            <h2>Shop anytime, anywhere</h2>
+            <p>Save more with coupons & up to 70% off! </p>
+        </section>
+    
+        <section class="product1 section-p1">
+            <h2>Featured Product</h2>
+            <p>Summer Collection with New Design</p>
+            <div class="pro-container">
+                <template for:each={products} for:item="product" key={product.Id}>
+                    <div key={product.Id} class="product-container">
+                        <img src={product.ImageUrl__c} alt={product.Product_Title__c}>
+                        <p>Category: {product.Categories__c}</p>
+                        <h2>{product.Product_Title__c}</h2>
+                        <p>Price: {product.Product_Price__c}</p>
+                        <button style="color: black;" onclick={addToCart} data-product={product}>
+                            Add to Cart
+                        </button>
+                    </div>
+                </template>
+            </div>
+        </section>
+    
+        <section class="pagination section-p1">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#" class="next">Next</a>
+        </section>
+    </div>
+
+    <div if:true={showThirdDiv}>
+        <section class="aboutHeader" style={backgroundAboutBanner}>
+            <h2> Unveiling the Passion Behind Fantastic</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </section>
+    
+        <section class="aboutHead section-p1">
+            <img src={aboutMain} alt="">
+            <div>
+                <h2>About us</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio ex saepe fugiat natus placeat culpa in repudiandae praesentium, tempore hic eum odit iusto distinctio voluptatum. Voluptates quas tempore distinctio vitae. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate soluta eligendi odio doloremque. Odio, aliquid et totam nihil quibusdam, quia, amet voluptates quidem quasi laboriosam quam est necessitatibus ab quae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus in dolor dicta. Eaque quia quas asperiores aliquid aut fuga corrupti aliquam eius? Laudantium, quo culpa molestiae laborum similique harum dignissimos.</p>
+            </div>
+        </section>
+    </div>
+
+    <div if:true={showFourDiv}>
+        <section class="page-header blogHeader" style={backgroundBlogPage}>
+            <h2>Regular updates to Read</h2>
+            <p>Read all case studies about our products!</p>
+        </section>
+    
+        <section class="blog">
+            <div class="blogBox">
+                <div class="blogImage">
+                    <img src={blog1} alt="">
+                </div>
+                <div class="blogDetails">
+                    <h4>The Cotton-Jersey zip-up Hoddies</h4>
+                    <p>Kickstarter man braid godard coloring book. Raclatte waistcoat selfies wolf chartreuse hexagon irony, godard.</p>
+                    <a href="#">CONTINUE READ</a>
+                </div>
+                <H1>14/01</H1>
+            </div>
+            <div class="blogBox">
+                <div class="blogImage">
+                    <img src={blog2} alt="">
+                </div>
+                <div class="blogDetails">
+                    <h4>Atlantic-Pacific creator Blair Eadie has been in the fashion industry for several years now</h4>
+                    <p>Kickstarter man braid godard coloring book. Raclatte waistcoat selfies wolf chartreuse hexagon irony, godard.</p>
+                    <a href="#">CONTINUE READ</a>
+                </div>
+                <H1>14/01</H1>
+            </div>
+            <div class="blogBox">
+                <div class="blogImage">
+                    <img src={blog3} alt="">
+                </div>
+                <div class="blogDetails">
+                    <h4>The Daileigh’s Ashleigh Hutchinson wants her readers to build their perfect closet. </h4>
+                    <p>Kickstarter man braid godard coloring book. Raclatte waistcoat selfies wolf chartreuse hexagon irony, godard.</p>
+                    <a href="#">CONTINUE READ</a>
+                </div>
+                <H1>14/01</H1>
+            </div>
+            <div class="blogBox">
+                <div class="blogImage">
+                    <img src={blog4} alt="">
+                </div>
+                <div class="blogDetails">
+                    <h4> People come in all shapes and sizes, but many of us have been conditioned to believe that only one body type is ideal for fashion.</h4>
+                    <p>Kickstarter man braid godard coloring book. Raclatte waistcoat selfies wolf chartreuse hexagon irony, godard.</p>
+                    <a href="#">CONTINUE READ</a>
+                </div>
+                <H1>14/01</H1>
+            </div>
+            <div class="blogBox">
+                <div class="blogImage">
+                    <img src={blog5} alt="">
+                </div>
+                <div class="blogDetails">
+                    <h4>Christine is a true style icon, having appeared on Vanity Fair’s Best-Dressed List.</h4>
+                    <p>Kickstarter man braid godard coloring book. Raclatte waistcoat selfies wolf chartreuse hexagon irony, godard.</p>
+                    <a href="#">CONTINUE READ</a>
+                </div>
+                <H1>14/01</H1>
+            </div>
+            <div class="blogBox">
+                <div class="blogImage">
+                    <img src={blog6} alt="">
+                </div>
+                <div class="blogDetails">
+                    <h4>My Fash Diary has gained international recognition, receiving nominations for Marie Claire, Twitter, UK Blog, and Ahlan! Magazine’s Best at the Dubai awards. </h4>
+                    <p>Kickstarter man braid godard coloring book. Raclatte waistcoat selfies wolf chartreuse hexagon irony, godard.</p>
+                    <a href="#">CONTINUE READ</a>
+                </div>
+                <H1>14/01</H1>
+            </div>
+            <div class="blogBox">
+                <div class="blogImage">
+                    <img src={small1Url} alt="">
+                </div>
+                <div class="blogDetails">
+                    <h4>In One Dapper Street, Marcel has combined his two other passions—photography and shopping.</h4>
+                    <p>Kickstarter man braid godard coloring book. Raclatte waistcoat selfies wolf chartreuse hexagon irony, godard.</p>
+                    <a href="#">CONTINUE READ</a>
+                </div>
+                <H1>14/01</H1>
+            </div>
+        </section>
+    
+        <section class="pagination section-p1">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#" class="next">Next</a>
+        </section>
+
+    </div>
+
+    <div if:true={showFifthPage}>
+        <section class="pageHeader cartHeader" style={backgroundCartBanner}>
+            <h2>#Your Cart</h2>
+        </section>
+    
+        <section class="cartContainer sectionP1">
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>Remove</th>
+                        <th>Images</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <template for:each={cartItems} for:item="item">
+                        <tr key={item.Id}>
+                            <td>
+                                <lightning-button variant="destructive" label="Remove" data-cart-item-id={item.Id} onclick={removeFromCartHandler}></lightning-button>
+                            </td>
+                            <td><img src={item.ImageUrl} alt={item.ProductName}></td>
+                            <td>{item.ProductName}</td>
+                            <td>{item.Price}</td>
+                        </tr>
+                    </template>
+                    
+                    
+                </tbody>
+            </table>
+        </section>
+    
+        <section class="cartBottom">
+            <div class="total">
+                <div class="cartTotal">
+                    <h5>Cart Total</h5>
+                </div>
+                <div class="sub">
+                    <h6>Subtotal</h6>
+                    <p>{subtotal}</p>
+                </div>
+                <div class="ship">
+                    <h6>Shipping Cost</h6>
+                    <p>15</p>
+                </div>
+                <hr>
+                <div class="final">
+                    <h6>Total</h6>
+                    <p>{total}</p>
+                </div>
+                <div class="proceed">
+                    <lightning-button onclick={handlePlaceOrder} label="Place Order"></lightning-button>
+                </div>
+            </div>
+        </section>
+        
+         <!-- Modal div for successfully placed order -->
+<div class="modal" style={modalStyle}>
+    <div class="modal-content">
+        <p>Order successfully placed!</p>
+        <button class="close" onclick={handleCloseModal}>Close</button>
+    </div>
+</div>
+
+    </div>
+    
+    <!-- ----------------------sign up------------------------- -->
+    
+
+    <footer class="section-p1">
+        <div class="col">
+            <h2 style="font-family: 'Brush Script MT', cursive;" class="logo">Fantastic</h2>
+            <h4>Contact</h4>
+            <p><strong>Address:</strong> Near, D-404, The First Synthesis B/H Keshav Baugh Party Plot, Ahmedabad, Gujarat</p>
+            <p><strong>Phone:</strong> +91 3456797623 / 9234508765</p>
+            <p><strong>Hours:</strong> 10:00 - 19:00, Mon-Fri</p>
+
+        </div>
+        <div class="col">
+            <h4>About</h4>
+            <a href="">About us</a>
+            <a href="">Delivery Information </a>
+            <a href="">Privacy Policy</a>
+            <a href="">Terms & Conditions</a>
+            <a href="">Contact us</a>
+        </div>
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="">Sign In</a>
+            <a href="">View cart</a>
+            <a href="">Track Order</a>
+            <a href="">Help</a>
+        </div>
+        <div class="copy">
+            <p>Fantastic @ 2024</p>
+        </div>
+    </footer>
+
+</template>
